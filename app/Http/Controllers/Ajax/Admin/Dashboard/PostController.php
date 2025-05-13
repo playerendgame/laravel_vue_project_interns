@@ -36,4 +36,31 @@ class PostController extends Controller
         $post = Post::find($id);
         return response()->json($post);
     }
+    public function update(Request $request, $id){
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'date' => 'required|date',
+        ]);
+
+       $post = Post::find($id);
+
+       $post->title = $request->input('title');
+       $post->description = $request->input('description');
+       $post->date = $request->input('date');
+       $post->save();
+
+        return response()->json(['message' => 'Success updating data']);
+    }
+
+    public function delete($id){
+
+        $people = Post::find($id);
+        $people->delete();
+
+        $result = ($people) ? 'Deleted Successfully' : 'Error Deleting';
+
+        return response()->json(['message' => $result]);
+
+     }
 }

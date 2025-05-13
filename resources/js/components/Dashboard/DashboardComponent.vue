@@ -1,12 +1,12 @@
 <template>
   <div>
-    <addblog-component />
+    
+    <addblog-component @refresh-table="refreshTable" />
 
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
       <div class="container-fluid">
         <a class="navbar-brand text-white fw-bold ms-5 px-3" href="#">Account</a>
-
         <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav mx-auto d-flex flex-row justify-content-center">
             <li class="nav-item">
@@ -64,9 +64,12 @@
               <h5 class="card-title">{{ item.title }}</h5>
               <p class="card-text">{{ item.description }}</p>
               <p class="card-text text-muted mt-auto">Date: {{ item.date }}</p>
-              <div class = "button d-flex">
-                <button class = "btn btn-success" @click="updateData(item.id)">Update</button>
-                <updateblog-component :itemId="item.id" />
+              <div class="button d-flex">
+                <button class="btn btn-success" @click="updateData(item.id)">Update</button>
+                <updateblog-component :itemId="item.id" @refresh-table="refreshTable" />
+                <button class="btn btn-danger" @click="deletePost(item.id)">
+                  Delete
+                </button>
               </div>
             </div>
           </div>
@@ -91,8 +94,9 @@ export default {
     addBlog() {
       this.$bvModal.show('addBlog');
     },
+
     updateData(itemId) {
-      this.$bvModal.show(`updata-data-${itemId}`)
+      this.$bvModal.show(`updata-data-${itemId}`);
     },
 
     getData() {
@@ -116,18 +120,43 @@ export default {
 
     handleImageError(event) {
       event.target.src = this.defaultImage;
-    }
+    },
+
+    deletePost(postId) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'This post will be deleted permanently!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .post(`/delete/post/${postId}`)
+            .then(() => {
+              Swal.fire('Deleted!', 'The post has been deleted.', 'success');
+              this.getData(); 
+            })
+            .catch((error) => {
+              Swal.fire('Error!', 'There was a problem deleting the post.', 'error');
+              console.error(error.message);
+            });
+        }
+      });
+    },
   },
 
   mounted() {
     this.getData();
-  }
+  },
 };
 </script>
 
 <style scoped>
 .card-img-top {
-  height: 200px;
+  height: 200px; 
   object-fit: cover;
 }
 </style>
