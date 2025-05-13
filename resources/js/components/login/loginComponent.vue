@@ -1,6 +1,6 @@
 <template>
     <div>
-        <register-modal-component/>
+        <register-modal-component />
         <div class="login-container p-4 shadow">
             <form method="POST">
                 <div class="row">
