@@ -42,5 +42,7 @@
     </div>
     
     @include('script')
+
+
 </body>
 </html>
