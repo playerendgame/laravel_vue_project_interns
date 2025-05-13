@@ -1,12 +1,12 @@
 <template>
   <div>
-    <addblog-component />
+    
+    <addblog-component @refresh-table="refreshTable" />
 
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
       <div class="container-fluid">
         <a class="navbar-brand text-white fw-bold ms-5 px-3" href="#">Account</a>
-
         <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav mx-auto d-flex flex-row justify-content-center">
             <li class="nav-item">
@@ -29,12 +29,7 @@
 
         <div class="d-flex ms-auto">
           <form class="d-flex ms-3" role="search">
-            <input
-              class="form-control rounded-pill px-3 me-2"
-              type="search"
-              placeholder="Search..."
-              aria-label="Search"
-            />
+            <input class="form-control rounded-pill px-3 me-2" vtype="search" placeholder="Search..." aria-label="Search"/>
             <button class="btn btn-outline-light rounded-pill px-4" type="submit">Go</button>
           </form>
         </div>
@@ -54,18 +49,18 @@
       <div class="row">
         <div class="col-md-4 mb-4" v-for="item in post" :key="item.id">
           <div class="card h-100 shadow-sm">
-            <img
-              :src="getImageUrl(item.image)"
-              class="card-img-top"
-              alt="Blog image"
-              style="height: 200px; object-fit: cover;"
-            />
+            <img :src="getImageUrl(item.image)" class="card-img-top" alt="Blog image" style="height: 200px; object-fit: cover;"/>
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ item.title }}</h5>
               <p class="card-text">{{ item.description }}</p>
               <p class="card-text text-muted mt-auto">Date: {{ item.date }}</p>
+              <div class="button d-flex">
+                <button class="btn btn-success" @click="updateData(item.id)">Update</button>
+                <updateblog-component :itemId="item.id" @refresh-table="refreshTable" />
+                <button class="btn btn-danger" @click="deletePost(item.id)">Delete</button>
+              </div>
             </div>
-          </div>
+          </div>  
         </div>
       </div>
     </div>
@@ -86,6 +81,10 @@ export default {
   methods: {
     addBlog() {
       this.$bvModal.show('addBlog');
+    },
+
+    updateData(itemId) {
+      this.$bvModal.show(`updata-data-${itemId}`);
     },
 
     getData() {
@@ -109,18 +108,43 @@ export default {
 
     handleImageError(event) {
       event.target.src = this.defaultImage;
-    }
+    },
+
+    deletePost(postId) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'This post will be deleted permanently!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .post(`/delete/post/${postId}`)
+            .then(() => {
+              Swal.fire('Deleted!', 'The post has been deleted.', 'success');
+              this.getData(); 
+            })
+            .catch((error) => {
+              Swal.fire('Error!', 'There was a problem deleting the post.', 'error');
+              console.error(error.message);
+            });
+        }
+      });
+    },
   },
 
   mounted() {
     this.getData();
-  }
+  },
 };
 </script>
 
 <style scoped>
 .card-img-top {
-  height: 200px;
+  height: 200px; 
   object-fit: cover;
 }
 </style>

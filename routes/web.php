@@ -27,5 +27,7 @@ Route::namespace('App\Http\Controllers\Admin')->group(function() {
 Route::post('/add/post/data', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'create'])->name('post-create');
 Route::get('/fetch/post', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'list'])->name('post-list');
 Route::get('/fetch/post/{id}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'fetchPostPerId']);
+Route::post('/update/post/{id}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'update']);
+Route::post('/delete/post/{id}', [PostController::class, 'delete']);
 
 

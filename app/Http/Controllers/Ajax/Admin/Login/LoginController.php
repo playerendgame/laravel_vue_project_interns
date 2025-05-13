@@ -17,9 +17,9 @@ class LoginController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required|confirmed',
-            'password_confirmation' =>'required|same:password' 
+            'password_confirmation' =>'required|same:password'
         ]);
-        
+
         if($user = new User()){
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -44,7 +44,7 @@ class LoginController extends Controller
         $user = User::where('email', $request->input('email'))->first();
         if($user){
             if(Hash::check($request->input('password'), $user->password)){
-                Auth::guard('admin')->login($user);
+                Auth::guard('user')->login($user);
                 return redirect()->route('dashboard');
             }else{
                 return redirect()->back()->withErrors(['email' => 'Invalid Email or Password']);
@@ -52,7 +52,7 @@ class LoginController extends Controller
         }else {
             return redirect()->back()->withErrors(['email' => 'Invalid Email or Password']);
         }
-        
+
     }
 }
 
