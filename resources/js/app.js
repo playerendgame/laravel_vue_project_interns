@@ -32,7 +32,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('dashboard-component', require('./components/Dashboard/DashboardComponent.vue').default);
 Vue.component('addblog-component', require('./components/Dashboard/AddBlogComponent.vue').default);
 Vue.component('updateblog-component', require('./components/Dashboard/UpdateModalComponent.vue').default);
-
+Vue.component('home-component', require('./components/LandingPage/HomeComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
