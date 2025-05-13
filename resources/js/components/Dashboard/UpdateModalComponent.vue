@@ -1,10 +1,21 @@
 <template>
-    <script>
+    
     <div>
 
-        <b-modal>
-              
-        </bmodal>
+        <b-modal :id="`updata-data-${itemId}`">
+              try
+        </b-modal>
     </div>
-    </script>
+    
 </template>
+<script>
+export default{
+    props:{
+        
+    itemId:{
+        type: Number,
+         required: true
+    }
+ }
+}
+</script>
