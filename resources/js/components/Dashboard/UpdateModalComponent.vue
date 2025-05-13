@@ -1,10 +1,8 @@
 <template>
-    <script>
     <div>
 
         <b-modal>
               
-        </bmodal>
+        </b-modal>
     </div>
-    </script>
 </template>
