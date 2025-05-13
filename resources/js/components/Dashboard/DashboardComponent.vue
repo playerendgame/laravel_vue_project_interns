@@ -64,6 +64,10 @@
               <h5 class="card-title">{{ item.title }}</h5>
               <p class="card-text">{{ item.description }}</p>
               <p class="card-text text-muted mt-auto">Date: {{ item.date }}</p>
+              <div class = "button d-flex">
+                <button class = "btn btn-success" @click="updateData(item.id)">Update</button>
+                <updateblog-component :itemId="item.id" />
+              </div>
             </div>
           </div>
         </div>
@@ -86,6 +90,9 @@ export default {
   methods: {
     addBlog() {
       this.$bvModal.show('addBlog');
+    },
+    updateData(itemId) {
+      this.$bvModal.show(`updata-data-${itemId}`)
     },
 
     getData() {
