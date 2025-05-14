@@ -4,7 +4,7 @@
 
 @section('contents')
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+    <nav class="navbar navbar- navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
             <div class="container-fluid">
                 <a class="navbar-brand text-white fw-bold ms-5 px-3" href="#">Travel Blog</a>
 
