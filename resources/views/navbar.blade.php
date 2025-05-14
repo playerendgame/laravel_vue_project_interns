@@ -13,7 +13,7 @@
                         Categories
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                        <li><a class="dropdown-item" href="#">Beaches</a></li>
+                        <li><a class="dropdown-item" href="{{ route('beaches') }}">Beaches</a></li>
                         <li><a class="dropdown-item" href="#">Waterfalls</a></li>
                         <li><a class="dropdown-item" href="#">Mountain Climbing</a></li>
                     </ul>
