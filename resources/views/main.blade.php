@@ -5,7 +5,7 @@
 </head>
 <body>
 
-@include('navbar')
+
     <div class="container-fluid">
 
         <div id="app">

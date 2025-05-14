@@ -1,5 +1,5 @@
 <template>
-    <b-modal id="signInModal" :hide-footer="true">
+    <b-modal id="signInModal" :hide-footer="true" title="Sign In User">
         <div>
             <h4 style="text-align: center;">User Sign Up</h4>
             <div class="form-group">
