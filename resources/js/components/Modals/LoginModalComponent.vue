@@ -1,7 +1,6 @@
 <template>
-  <b-modal id="loginModal" :hide-footer="true">
+  <b-modal id="loginModal" :hide-footer="true" title="Login User">
     <div>
-      <h4 style="text-align: center;">Login</h4>
       <div class="form-group">
         <label class="form-label">Email</label>
         <input class="form-control" v-model="post.email" type="email" required>
