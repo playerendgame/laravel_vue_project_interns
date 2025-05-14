@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-modal :id="`updata-data-${itemId}`" :hide-footer="true" title="Update Post" @show="showData">
+        <b-modal :id="`updata-data-${itemId}`" :hide-footer="true" title="Update Post" @show="showData" size="lg" centered  hide-header-close="false" @hidden="resetForm">
             <div class="modal-body">
                 <div class="form-group">
                     <label class="form-label">Title</label>
@@ -18,6 +18,7 @@
             <br />
             <div class="buttons">
                 <button class="btn btn-success" @click="update">Save</button>
+                <button class="btn btn-secondary me-2" @click="hideModal">Cancel</button>
             </div>
         </b-modal>
     </div>

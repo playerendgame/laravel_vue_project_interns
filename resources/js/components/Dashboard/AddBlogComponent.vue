@@ -1,30 +1,34 @@
 <template>
+  <b-modal id="addBlog" title="Create New Blog" :hide-footer="true" size="lg" centered  hide-header-close="false" @hidden="resetForm">
+    <div class="modal-body px-4 py-3">
 
-        <b-modal id="addBlog" title="Create New Blog" :hide-footer="true">
-          <div class="modal-body">
-              <div class="form-group">
-                <label class="form-label">Title</label>
-                <input class="form-control" v-model="post.title" type="text" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Description</label>
-                <input class="form-control" v-model="post.description" type="text" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Date</label>
-                <input class="form-control" v-model="post.date" type="date" required />
-              </div>
-          </div>
-          <br />
-          <div class="buttons">
-            <button class="btn btn-success" @click="create">Post</button>
-          </div>
-        </b-modal>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Title</label>
+        <input class="form-control form-control-lg" v-model="post.title" type="text" placeholder="Enter blog title" required />
+      </div>
 
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Description</label>
+        <textarea class="form-control" v-model="post.description" rows="4" placeholder="Write a brief description..." required></textarea>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Date</label>
+        <input class="form-control" v-model="post.date" type="date" required />
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-success" @click="create">Post</button>
+        <button class="btn btn-secondary me-2" @click="hideModal">Cancel</button>
+      </div>
+
+    </div>
+  </b-modal>
 </template>
 
+
 <script>
-import axios from 'axios';
+
 import Swal from 'sweetalert2';
 
 export default {
