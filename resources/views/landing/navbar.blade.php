@@ -27,9 +27,9 @@
                     </ul>
                 </div>
 
-                <div class="d-flex ms-auto">
-                <button class="btn btn-outline-light rounded-pill px-4" type="submit">Sign Up</button>
-                <button class="btn btn-outline-light rounded-pill px-4" type="submit">Login</button>
+                <div class="d-flex ms-auto" style="gap: 10px">
+                <button class="btn btn-outline-light rounded-pill px-4 fw-semibold" type="submit">Sign Up</button>
+                <button class="btn btn-outline-light rounded-pill px-4 fw-semibold" type="submit">Login</button>
                 </div>
 
             </div>
