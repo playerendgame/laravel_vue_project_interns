@@ -4,13 +4,12 @@
    @include('head')
 </head>
 <body>
-
     <div class="container-fluid">
 
-        @yield('contents') 
+        @yield('contents')
 
     </div>
-        
+
     @include('script')
 
 

@@ -21,7 +21,10 @@ use App\Http\Controllers\Ajax\Admin\Dashboard\DashboardController;
 Route::namespace('App\Http\Controllers\Admin')->group(function() {
 
     Route::get('/dashboard', 'Dashboard\DashboardController@index');
-    Route::get('/', 'LandingPage\HomeController@index');
+    Route::get('/home', 'LandingPage\HomeController@index')->name('home');
+    Route::get('/about', 'LandingPage\AboutController@index')->name('about');
+    Route::get('/categories', 'LandingPage\CategoriesController@index')->name('categories');
+    Route::get('/', 'LandingPage\TravelBlogController@index');
 
 });
 
