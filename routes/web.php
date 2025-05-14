@@ -33,5 +33,6 @@ Route::get('/fetch/post', [App\Http\Controllers\Ajax\Admin\Dashboard\PostControl
 Route::get('/fetch/post/{id}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'fetchPostPerId']);
 Route::post('/update/post/{id}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'update']);
 Route::post('/delete/post/{id}', [PostController::class, 'delete']);
-
+Route::post('/register',[App\Http\Controllers\Ajax\Admin\Login\LoginController::class,'register'])->name('register');
+Route::post('/login',[App\Http\Controllers\Ajax\Admin\Login\LoginController::class,'login'])->name('login');
 

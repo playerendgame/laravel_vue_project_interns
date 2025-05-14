@@ -35,6 +35,8 @@ Vue.component('updateblog-component', require('./components/Dashboard/UpdateModa
 Vue.component('home-component', require('./components/LandingPage/HomeComponent.vue').default);
 Vue.component('about-component', require('./components/LandingPage/AboutComponent.vue').default);
 Vue.component('categories-component', require('./components/LandingPage/CategoriesComponent.vue').default);
+Vue.component('login-component', require('./components/Modals/LoginModalComponent.vue').default);
+Vue.component('signin-component', require('./components/Modals/SignInModalComponent.vue').default);
 
 
 

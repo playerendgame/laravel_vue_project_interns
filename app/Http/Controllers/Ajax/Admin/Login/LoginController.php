@@ -14,24 +14,20 @@ class LoginController extends Controller
 
         $request->validate([
 
-            'name' => 'required',
-            'email' => 'required',
+            'name' => 'required|string',
+            'email' => 'required|string',
             'password' => 'required|confirmed',
             'password_confirmation' =>'required|same:password'
         ]);
 
-        if($user = new User()){
+        $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
-        return redirect()->route('login.login');
-    }
-        else {
-
-        return response()->json(['message' =>'Error Retrieving Data'], 422);
-    }
+        $result = ($user) ? 'Data has been created successfully' : 'There has an error creating a post';    
+        return response()->json(['message' => $result]);
     }
 
     public function login(Request $request){
@@ -45,7 +41,7 @@ class LoginController extends Controller
         if($user){
             if(Hash::check($request->input('password'), $user->password)){
                 Auth::guard('user')->login($user);
-                return redirect()->route('dashboard');
+                return redirect()->route('home');
             }else{
                 return redirect()->back()->withErrors(['email' => 'Invalid Email or Password']);
             }

@@ -24,8 +24,8 @@
                 </div>
 
                 <div class="d-flex ms-auto" style="gap: 10px">
-                <button class="btn btn-outline-light rounded-pill px-4 fw-semibold" type="submit">Sign Up</button>
-                <button class="btn btn-outline-light rounded-pill px-4 fw-semibold" type="submit">Login</button>
+                <button class="btn btn-outline-light rounded-pill px-4 fw-semibold" @click="$bvModal.show('signInModal')" >Sign Up</button> <signin-component></signin-component>
+                <button class="btn btn-outline-light rounded-pill px-4 fw-semibold" @click="$bvModal.show('loginModal')" >Login</button> <login-component><login-component>
                 </div>
 
             </div>

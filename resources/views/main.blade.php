@@ -8,7 +8,10 @@
 @include('navbar')
     <div class="container-fluid">
         
-        @yield('contents')
+        <div id="app">
+            @yield('contents')
+        </div>
+
 
     </div>
 
