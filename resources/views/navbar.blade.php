@@ -1,7 +1,3 @@
-@extends('main')
-
-@section('contents')
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
     <div class="container-fluid">
         <a class="navbar-brand text-white fw-bold ms-5 px-3" href="#">Travel Blog</a>
@@ -40,24 +36,24 @@
 
 <style>
     .dropdown-menu {
-        background-color: #212529; 
+        background-color: #212529;
         border: none;
         padding: 0;
         min-width: 180px;
     }
 
     .dropdown-menu .dropdown-item {
-        color: #e0e0e0; 
+        color: #e0e0e0;
         padding: 12px 16px;
-        border-bottom: 4px solid #333; 
+        border-bottom: 4px solid #333;
     }
 
     .dropdown-menu .dropdown-item:last-child {
-        border-bottom: none; 
+        border-bottom: none;
     }
 
     .dropdown-menu .dropdown-item:hover {
-        background-color: #181818; 
+        background-color: #181818;
         color: #fff;
     }
 
@@ -67,5 +63,3 @@
     }
 </style>
 
-
-@endsection
