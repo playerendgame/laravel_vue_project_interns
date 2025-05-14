@@ -1,4 +1,5 @@
 <template>
+  
   <b-modal id="addBlog" title="Create New Blog" :hide-footer="true" size="lg" centered  hide-header-close="false" @hidden="resetForm">
     <div class="modal-body px-4 py-3">
 

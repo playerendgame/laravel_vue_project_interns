@@ -1,40 +1,22 @@
 <template>
+  
   <div>
     
     <addblog-component @refresh-table="refreshTable" />
 
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
-      <div class="container-fluid">
-        <a class="navbar-brand text-white fw-bold ms-5 px-3" href="#">Account</a>
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav mx-auto d-flex flex-row justify-content-center">
-            <li class="nav-item">
-              <a class="nav-link custom-hover fw-semibold text-white" href="#">Home</a>
-            </li>
-            <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
-            <li class="nav-item">
-              <a class="nav-link custom-hover fw-semibold text-white" href="#">Categories</a>
-            </li>
-            <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
-            <li class="nav-item">
-              <a class="nav-link custom-hover fw-semibold text-white" href="#">About</a>
-            </li>
-          </ul>
-        </div>
-        <div class="d-flex ms-auto">
-          <form class="d-flex ms-3" role="search">
-            <input class="form-control rounded-pill px-3 me-2" vtype="search" placeholder="Search..." aria-label="Search"/>
-            <button class="btn btn-outline-light rounded-pill px-4" type="submit">Go</button>
-          </form>
+
+        <div class="poster-section mb-5">
+        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhdmVsJTIwd2FsbHBhcGVyfGVufDB8fDB8fHww" class="poster-img"  alt="Travel Thailand" />
+        <div class="poster-overlay justify-content-center">
+          <h1 class="fw-bold">Travel Diary Blog</h1>
+          <p class="lead">Your next adventure starts here</p>
         </div>
       </div>
-    </nav>
 
     <!-- Page Content -->
     <div class="container mt-5">
+
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="fw-bold">Travel Blog</h3>
         <button type="button" class="btn btn-success" @click="addBlog">
           Add Blog
         </button>
@@ -59,6 +41,8 @@
         </div>
       </div>
     </div>
+
+
   </div>
 </template>
 
@@ -83,8 +67,7 @@ export default {
     },
 
     getData() {
-      axios
-        .get('/fetch/post')
+      axios.get('/fetch/post')
         .then((response) => {
           this.post = response.data;
         })
@@ -136,22 +119,41 @@ export default {
   },
 };
 </script>
+
 <style>
+.poster-section {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(70%);
+}
+
+.poster-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+
+</style>
+<style scoped>
 .card-img-top {
   height: 200px; 
   object-fit: cover;
 }
-
-.custom-hover {
-  transition: color 0.3s, background-color 0.3s;
-}
-
-.custom-hover:hover {
-  color: #ffc107 !important;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-}
-
 
 </style>
 

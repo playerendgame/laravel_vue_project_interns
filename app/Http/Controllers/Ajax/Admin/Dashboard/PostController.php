@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Ajax\Admin\Dashboard;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -28,7 +29,10 @@ class PostController extends Controller
     }
 
     public function list(){
-        $post = Post::all();
+
+        $adminId = Auth::guard('user')->user()->id;
+
+        $post = Post::where('admin_id', $adminId);
         return response($post);
     }
 

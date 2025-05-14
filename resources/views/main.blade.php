@@ -4,6 +4,8 @@
    @include('head')
 </head>
 <body>
+
+@include('navbar')
     <div class="container-fluid">
         
         @yield('contents')

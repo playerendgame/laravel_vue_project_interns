@@ -1,28 +1,24 @@
 
-@extends('main')
 
-
-@section('contents')
-
-    <nav class="navbar navbar- navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+   <nav class="navbar  navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
             <div class="container-fluid">
                 <a class="navbar-brand text-white fw-bold ms-5 px-3" href="#">Travel Blog</a>
 
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="navbar-nav mx-auto d-flex flex-row justify-content-center">
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold text-white" href="{{route('home')}}">Home</a>
+                            <a class="nav-link custome-hover fw-semibold text-white" href="{{route('home')}}">Home</a>
                         </li>
                         <li class="vr text-white mx-2" style="height: 40px; width: 2px;">
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold text-white" href="{{route('categories')}}">Categories</a>
+                            <a class="nav-link custome-hover fw-semibold text-white" href="{{route('categories')}}">Categories</a>
                         </li>
                         <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
 
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold text-white" href="{{route('about')}}">About</a>
+                            <a class="nav-link custome-hover fw-semibold text-white" href="{{route('about')}}">About</a>
                         </li>
                     </ul>
                 </div>
@@ -35,4 +31,17 @@
             </div>
         </nav>
 
-@endsection
+        <style>
+
+.custom-hover {
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.custom-hover:hover {
+  color: #ffc107 !important;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+
+</style>
