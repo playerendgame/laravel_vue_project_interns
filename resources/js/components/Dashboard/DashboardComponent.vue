@@ -73,7 +73,7 @@
       <div class="row">
         <div class="col-md-4 mb-4" v-for="item in post" :key="item.id">
           <div class="card h-100 shadow-sm">
-            <img :src="getImageUrl(item.image)" class="card-img-top" alt="Blog image" style="height: 200px; object-fit: cover;"/>
+            <img :src="item.image" class="card-img-top" alt="Blog image" style="height: 200px; object-fit: cover;"/>
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ item.title }}</h5>
               <p class="card-text">{{ item.description }}</p>
