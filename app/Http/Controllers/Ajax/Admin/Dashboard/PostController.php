@@ -22,6 +22,7 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         $post->date = $request->input('date');
+        $post->admin_id = auth()->id();
         $post->save();
 
         $result = ($post) ? 'Data has been created successfully' : 'There has an error creating a post';    
@@ -32,8 +33,8 @@ class PostController extends Controller
 
         $adminId = Auth::guard('user')->user()->id;
 
-        $post = Post::where('admin_id', $adminId);
-        return response($post);
+        $post = Post::where('admin_id', $adminId)->get();
+        return response()->json($post);
     }
 
     public function fetchPostPerId($id) {
