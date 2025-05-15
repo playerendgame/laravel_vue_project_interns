@@ -12,6 +12,7 @@ window.Vue = require('vue').default;
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';

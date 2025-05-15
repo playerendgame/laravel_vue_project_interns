@@ -30,25 +30,32 @@ class LoginController extends Controller
         return response()->json(['message' => $result]);
     }
 
-    public function login(Request $request){
+        public function login(Request $request){
 
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        $user = User::where('email', $request->input('email'))->first();
-        if($user){
-            if(Hash::check($request->input('password'), $user->password)){
-                Auth::guard('user')->login($user);
-                return redirect()->route('home');
-            }else{
-                return redirect()->back()->withErrors(['email' => 'Invalid Email or Password']);
-            }
-        }else {
-            return redirect()->back()->withErrors(['email' => 'Invalid Email or Password']);
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('user')->attempt($credentials)) {
+            return response()->json([
+                'message' => 'Login successful',
+                'redirect' => route('dashboard')
+            ]);
         }
 
+        return response()->json([
+            'message' => 'The provided email or password is incorrect'
+        ], 422); 
     }
+        
+        public function logout(Request $request){
+            
+            Auth::guard('user')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return response()->json(['message' => 'Logged out successfully']);
+        }
 }
-
