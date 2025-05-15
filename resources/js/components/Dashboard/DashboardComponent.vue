@@ -1,8 +1,9 @@
 <template>
-  
+
   <div>
-    
+
     <addblog-component @refresh-table="refreshTable" />
+
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
       <div class="container-fluid">
@@ -40,17 +41,19 @@
                 <i class="bi bi-person-circle fs-4"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                    <button type="button" class="dropdown-item" @click="profile">Profile</button>
+                </li>
                 <li>
                     <button type="button" class="dropdown-item" @click="logout">Logout</button>
                 </li>
               </ul>
             </div>
-          </div> 
+          </div>
       </div>
   </nav>
 
-  
+
     <div class="poster-section mb-5">
         <video class="poster-video" autoplay muted loop>
           <source :src="videoUrl" type="video/mp4">
@@ -84,7 +87,7 @@
                 <button class="btn btn-danger" @click="deletePost(item.id)">Delete</button>
               </div>
             </div>
-          </div>  
+          </div>
         </div>
       </div>
     </div>
@@ -152,7 +155,7 @@ export default {
             .post(`/delete/post/${postId}`)
             .then(() => {
               Swal.fire('Deleted!', 'The post has been deleted.', 'success');
-              this.getData(); 
+              this.getData();
             })
             .catch((error) => {
               Swal.fire('Error!', 'There was a problem deleting the post.', 'error');
@@ -176,11 +179,11 @@ export default {
         allowOutsideClick: false,
         didOpen: () => Swal.showLoading()
       });
-      
+
       axios.post('/logout/user')
         .then(() => {
           Swal.close();
-          window.location.href = '/';  
+          window.location.href = '/';
         })
         .catch(() => {
           Swal.close();
@@ -210,9 +213,9 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%; 
-  height: 100%;      
-  object-fit: cover;  
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   filter: brightness(80%);
   z-index: 1;
 }
@@ -258,7 +261,7 @@ export default {
 
 <style scoped>
 .card-img-top {
-  height: 200px; 
+  height: 200px;
   object-fit: cover;
 }
 

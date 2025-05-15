@@ -28,8 +28,9 @@ Route::namespace('App\Http\Controllers\Admin')->group(function() {
     Route::get('/categories', 'LandingPage\CategoriesController@index')->name('categories');
     Route::get('/', 'LandingPage\TravelBlogController@index');
     Route::get('/beaches', 'LandingPage\BeachesController@index')->name('beaches');
+    Route::get('profile', 'Profile\ProfileController@index')->name('profile');
 
-    
+
 
 });
 

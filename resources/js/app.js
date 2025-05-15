@@ -39,6 +39,7 @@ Vue.component('categories-component', require('./components/LandingPage/Categori
 Vue.component('login-component', require('./components/Modals/LoginModalComponent.vue').default);
 Vue.component('signin-component', require('./components/Modals/SignInModalComponent.vue').default);
 Vue.component('beaches-component', require('./components/Categories/BeachesComponent.vue').default);
+Vue.component('profile-component', require('./components/ProfileModal/ProfileComponent.vue').default);
 
 
 
