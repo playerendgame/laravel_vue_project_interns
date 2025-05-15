@@ -53,7 +53,7 @@
                         <h2>Why We Started This Blog</h2>
                     </div>
                     <div class="row">
-                        <p>We created <b>Travel Blog</b> because we believe travel should be inclusive, accessible, and meaningful. It’s not just about dream destinations or perfect photos — it’s about discovery, growth, and the little moments that stay with you long after you return home.</p>
+                        <p>We created <b>WanderStories</b> because we believe travel should be inclusive, accessible, and meaningful. It’s not just about dream destinations or perfect photos — it’s about discovery, growth, and the little moments that stay with you long after you return home.</p>
                         <p>Our goal is to build a space where anyone — no matter where you’re from or how you travel — can find inspiration, trusted advice, and a supportive community.</p>
                     </div>
                 </div>
