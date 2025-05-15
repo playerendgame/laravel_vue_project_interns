@@ -14,6 +14,11 @@
       </div>
 
       <div class="mb-4">
+        <label class="form-label fw-semibold">Post Image</label>
+        <input class="form-control" type="file" @change="handleFileChange" required />
+      </div>
+
+      <div class="mb-4">
         <label class="form-label fw-semibold">Date</label>
         <input class="form-control" v-model="post.date" type="date" required />
       </div>
@@ -39,7 +44,8 @@ export default {
         title: '',
         description: '',
         date: '',
-      }
+      },
+    image: null
     };
   },
 
@@ -64,7 +70,16 @@ export default {
       {
         if (result.isConfirmed) {
           Swal.showLoading();  
-          axios.post('/add/post/data', this.post)
+          let formData = new FormData();
+          formData.append('title', this.post.title);
+          formData.append('description', this.post.description);
+          formData.append('date', this.post.date);
+          formData.append('image', this.image);
+             axios.post('/add/post/data', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
             .then((response) => {
               Swal.hideLoading();  
 
@@ -91,8 +106,10 @@ export default {
         }
       });
     },
-
-  
+    handleFileChange(event) {
+      this.image = event.target.files[0];
+    },
+    
     clearFields() {
       this.post = {
         title: '',

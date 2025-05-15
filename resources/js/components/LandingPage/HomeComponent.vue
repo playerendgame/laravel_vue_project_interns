@@ -32,13 +32,24 @@
         </div>
 
         <div class="d-flex ms-auto" style="gap: 10px">
-            <button class="btn btn-outline-light rounded-pill px-4 fw-semibold" @click="$bvModal.show('signInModal')" type="submit">Sign Up</button>
+            <button class="btn btn-outline-light rounded-pill px-4 fw-semibold" @click="signUp" type="submit">Sign Up</button>
             <button class="btn btn-outline-light rounded-pill px-4 fw-semibold" @click="$bvModal.show('loginModal')" type="submit">Login</button>
         </div>
     </div>
 </nav>
 </div>
 </template>
+<script>
+export default {
+    methods:{
+        signUp(){
+            this.$bvModal.show('signInModal')
+        }
+    }
+}
+
+
+</script>
 
 <style scope>
     .dropdown-menu {
