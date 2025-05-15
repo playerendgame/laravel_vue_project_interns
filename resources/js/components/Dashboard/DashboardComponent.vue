@@ -1,10 +1,11 @@
 <template>
-  
+
   <div>
-    
+
     <addblog-component @refresh-table="refreshTable" />
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
       <div class="container-fluid">
           <a class="navbar-brand text-white fw-bold ms-5 px-3" href="#">Travel Blog</a>
 
@@ -32,15 +33,27 @@
                   </li>
               </ul>
           </div>
-
-          <div class="d-flex ms-auto" style="gap: 10px">
-              <button class="btn btn-outline-light rounded-pill px-4 fw-semibold" @click="$bvModal.show('signInModal')" type="submit">Sign Up</button>
-              <button class="btn btn-outline-light rounded-pill px-4 fw-semibold" @click="$bvModal.show('loginModal')" type="submit">Login</button>
+          <div v-if="user" class="d-flex align-items-center text-white fw-bold ms-auto me-3" style="gap: 10px; cursor: pointer;">
+            <span>Welcome, {{ user.name }}</span>
+            <div class="dropdown">
+              <a
+                class="text-white dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle fs-4"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li>
+                    <button type="button" class="dropdown-item" @click="profile">Profile</button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item" @click="logout">Logout</button>
+                </li>
+              </ul>
+            </div>
           </div>
       </div>
   </nav>
 
-  
+
     <div class="poster-section mb-5">
         <video class="poster-video" autoplay muted loop>
           <source :src="videoUrl" type="video/mp4">
@@ -63,7 +76,7 @@
       <div class="row">
         <div class="col-md-4 mb-4" v-for="item in post" :key="item.id">
           <div class="card h-100 shadow-sm">
-            <img :src="getImageUrl(item.image)" class="card-img-top" alt="Blog image" style="height: 200px; object-fit: cover;"/>
+            <img :src="item.image" class="card-img-top" alt="Blog image" style="height: 200px; object-fit: cover;"/>
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ item.title }}</h5>
               <p class="card-text">{{ item.description }}</p>
@@ -74,7 +87,7 @@
                 <button class="btn btn-danger" @click="deletePost(item.id)">Delete</button>
               </div>
             </div>
-          </div>  
+          </div>
         </div>
       </div>
     </div>
@@ -85,12 +98,14 @@
 
 <script>
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 export default {
   data() {
     return {
       post: [],
-      videoUrl:'/vid.mp4'
+      videoUrl: '/vid.mp4',
+      user: null,
     };
   },
 
@@ -140,7 +155,7 @@ export default {
             .post(`/delete/post/${postId}`)
             .then(() => {
               Swal.fire('Deleted!', 'The post has been deleted.', 'success');
-              this.getData(); 
+              this.getData();
             })
             .catch((error) => {
               Swal.fire('Error!', 'There was a problem deleting the post.', 'error');
@@ -149,10 +164,37 @@ export default {
         }
       });
     },
+    getAuthenticatedUser() {
+      axios.get('/auth/user')
+        .then(response => {
+          this.user = response.data;
+        })
+        .catch(() => {
+          this.user = null;
+        });
+    },
+    logout() {
+      Swal.fire({
+        title: 'Logging out...',
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading()
+      });
+
+      axios.post('/logout/user')
+        .then(() => {
+          Swal.close();
+          window.location.href = '/';
+        })
+        .catch(() => {
+          Swal.close();
+          Swal.fire('Error', 'Failed to logout. Please try again.', 'error');
+        });
+    },
   },
 
   mounted() {
     this.getData();
+    this.getAuthenticatedUser();
   },
 };
 </script>
@@ -171,9 +213,9 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%; 
-  height: 100%;      
-  object-fit: cover;  
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   filter: brightness(80%);
   z-index: 1;
 }
@@ -219,8 +261,12 @@ export default {
 
 <style scoped>
 .card-img-top {
-  height: 200px; 
+  height: 200px;
   object-fit: cover;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
 }
 
 </style>

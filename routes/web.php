@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Ajax\Admin\Dashboard\PostController;
+use App\Http\Controllers\Ajax\Admin\Login\LoginController;
 use App\Http\Controllers\Ajax\Admin\Dashboard\DashboardController;
 /*
 |--------------------------------------------------------------------------
@@ -20,17 +22,24 @@ use App\Http\Controllers\Ajax\Admin\Dashboard\DashboardController;
 
 Route::namespace('App\Http\Controllers\Admin')->group(function() {
 
-    Route::get('/dashboard', 'Dashboard\DashboardController@index');
+    Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
     Route::get('/home', 'LandingPage\HomeController@index')->name('home');
     Route::get('/about', 'LandingPage\AboutController@index')->name('about');
     Route::get('/categories', 'LandingPage\CategoriesController@index')->name('categories');
     Route::get('/', 'LandingPage\TravelBlogController@index');
+<<<<<<< HEAD
     Route::get('/beaches', 'BeachesController@index')->name('beaches'); 
     Route::get('/waterfalls', 'WaterfallsController@index')->name('waterfalls'); 
     Route::get('/mountainclimbing', 'MountainClimbingController@index')->name('mountainclimbing');
 
     
     
+=======
+    Route::get('/beaches', 'LandingPage\BeachesController@index')->name('beaches');
+    Route::get('profile', 'Profile\ProfileController@index')->name('profile');
+
+
+>>>>>>> 0d5dccda27596679a7ef53dd12bcc17ac0b95715
 
 });
 
@@ -41,4 +50,9 @@ Route::post('/update/post/{id}', [App\Http\Controllers\Ajax\Admin\Dashboard\Post
 Route::post('/delete/post/{id}', [PostController::class, 'delete']);
 Route::post('/register',[App\Http\Controllers\Ajax\Admin\Login\LoginController::class,'register'])->name('register');
 Route::post('/login',[App\Http\Controllers\Ajax\Admin\Login\LoginController::class,'login'])->name('login');
+Route::post('/logout/user',[App\Http\Controllers\Ajax\Admin\Login\LoginController::class, 'logout'])->name('logout');
 
+
+Route::get('/auth/user', function () {
+    return response()->json(Auth::guard('user')->user());
+})->name('auth.user');

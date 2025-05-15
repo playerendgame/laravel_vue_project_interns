@@ -12,6 +12,7 @@ window.Vue = require('vue').default;
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
@@ -37,9 +38,14 @@ Vue.component('about-component', require('./components/LandingPage/AboutComponen
 Vue.component('categories-component', require('./components/LandingPage/CategoriesComponent.vue').default);
 Vue.component('login-component', require('./components/Modals/LoginModalComponent.vue').default);
 Vue.component('signin-component', require('./components/Modals/SignInModalComponent.vue').default);
+<<<<<<< HEAD
 Vue.component('beaches-component', require('./components/BeachesComponent.vue').default);
 Vue.component('waterfalls-component', require('./components/WaterfallsComponent.vue').default);
 Vue.component('mountainclimbing-component', require('./components/MountainClimbingComponent.vue').default);
+=======
+Vue.component('beaches-component', require('./components/Categories/BeachesComponent.vue').default);
+Vue.component('profile-component', require('./components/ProfileModal/ProfileComponent.vue').default);
+>>>>>>> 0d5dccda27596679a7ef53dd12bcc17ac0b95715
 
 
 
