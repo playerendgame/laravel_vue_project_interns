@@ -10,6 +10,10 @@
                     <label class="form-label">Description</label>
                     <input class="form-control" v-model="post.description" type="text" />
                 </div>
+                 <div class="mb-4">
+                    <label class="form-label fw-semibold">Post Image</label>
+                    <input class="form-control" type="file" @change="handleFileChange" required />
+                </div>
                 <div class="form-group">
                     <label class="form-label">Date</label>
                     <input class="form-control" v-model="post.date" type="date" />
@@ -34,7 +38,8 @@ export default {
                 title: '',
                 description: '',
                 date: '',
-            }
+            },
+            image: null
         };
     },
     props: {
@@ -58,9 +63,21 @@ export default {
                     console.log(error);
                 });
         },
-
+        handleFileChange(event) {
+            this.image = event.target.files[0];
+        },
         update() {
-            axios.post(`/update/post/${this.itemId}`, this.post)
+           let formData = new FormData();
+            formData.append('title', this.post.title);
+            formData.append('description', this.post.description);
+            formData.append('date', this.post.date);
+            formData.append('image', this.image);
+
+            axios.post(`/update/post/${this.itemId}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
                 .then(response => {
                     Swal.fire({
                         title: 'Success',

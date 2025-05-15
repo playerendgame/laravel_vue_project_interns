@@ -21,4 +21,8 @@ class Post extends Model
     public function user(){
         return $this->belongsTo(User::class, 'admin_id');
     }
+
+     public function postImage(){
+        return $this->hasOne(PostImage::class, 'post_id');
+    }
 }
