@@ -37,7 +37,9 @@ Vue.component('about-component', require('./components/LandingPage/AboutComponen
 Vue.component('categories-component', require('./components/LandingPage/CategoriesComponent.vue').default);
 Vue.component('login-component', require('./components/Modals/LoginModalComponent.vue').default);
 Vue.component('signin-component', require('./components/Modals/SignInModalComponent.vue').default);
-Vue.component('beaches-component', require('./components/Categories/BeachesComponent.vue').default);
+Vue.component('beaches-component', require('./components/BeachesComponent.vue').default);
+Vue.component('waterfalls-component', require('./components/WaterfallsComponent.vue').default);
+Vue.component('mountainclimbing-component', require('./components/MountainClimbingComponent.vue').default);
 
 
 

@@ -25,7 +25,11 @@ Route::namespace('App\Http\Controllers\Admin')->group(function() {
     Route::get('/about', 'LandingPage\AboutController@index')->name('about');
     Route::get('/categories', 'LandingPage\CategoriesController@index')->name('categories');
     Route::get('/', 'LandingPage\TravelBlogController@index');
-    Route::get('/beaches', 'LandingPage\BeachesController@index')->name('beaches'); 
+    Route::get('/beaches', 'BeachesController@index')->name('beaches'); 
+    Route::get('/waterfalls', 'WaterfallsController@index')->name('waterfalls'); 
+    Route::get('/mountainclimbing', 'MountainClimbingController@index')->name('mountainclimbing');
+
+    
     
 
 });
