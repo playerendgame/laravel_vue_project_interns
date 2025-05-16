@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-modal :id="`updata-data-${itemId}`" :hide-footer="true" title="Update Post" @show="showData" size="lg" centered  hide-header-close="false" @hidden="resetForm">
+        <b-modal :id="`updata-data-${itemId}`" :hide-footer="true" title="Update Post" @show="showData" size="lg" centered  hide-header-close="false">
             <div class="modal-body">
                 <div class="form-group">
                     <label class="form-label">Title</label>
@@ -10,7 +10,15 @@
                     <label class="form-label">Description</label>
                     <input class="form-control" v-model="post.description" type="text" />
                 </div>
-                 <div class="mb-4">
+                 <div class="mb-4" style="margin-left: 1rem">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" v-model="updateImage" id="updatePostImage" switch>
+                        <label class="form-check-label" for="updatePostImage">
+                            You want to update post image?
+                        </label>
+                    </div>
+                </div>
+                 <div class="mb-4" v-if="updateImage">
                     <label class="form-label fw-semibold">Post Image</label>
                     <input class="form-control" type="file" @change="handleFileChange" required />
                 </div>
@@ -39,7 +47,8 @@ export default {
                 description: '',
                 date: '',
             },
-            image: null
+            image: null,
+            updateImage: false
         };
     },
     props: {
@@ -65,37 +74,53 @@ export default {
         },
         handleFileChange(event) {
             this.image = event.target.files[0];
-        },
-        update() {
-           let formData = new FormData();
-            formData.append('title', this.post.title);
-            formData.append('description', this.post.description);
-            formData.append('date', this.post.date);
-            formData.append('image', this.image);
+            if (this.image) {
+                let formData = new FormData();
+                formData.append('image', this.image)
 
-            axios.post(`/update/post/${this.itemId}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+                axios.post(`/update/post/image/${this.itemId}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
                 .then(response => {
                     Swal.fire({
                         title: 'Success',
                         icon: 'success',
-                        text: 'Post data updated successfully!'
+                        text: 'Post image updated successfully!'
                     });
-                    this.clearFields();
-                    this.hideModal();
                     this.$emit('refresh-table');
                 })
                 .catch(error => {
                     Swal.fire({
                         title: 'Error',
                         icon: 'error',
-                        text: 'Error updating post data.'
+                        text: 'Error updating post image.'
                     });
                     console.log(error); 
                 });
+            }
+        },
+        update() {
+            axios.post(`/update/post/${this.itemId}`, this.post)
+            .then(response => {
+                Swal.fire({
+                    title: 'Success',
+                    icon: 'success',
+                    text: 'Post data updated successfully!'
+                });
+                this.clearFields();
+                this.hideModal();
+                this.$emit('refresh-table');
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Error',
+                    icon: 'error',
+                    text: 'Error updating post data.'
+                });
+                console.log(error); 
+            });
         },
 
         clearFields() {
