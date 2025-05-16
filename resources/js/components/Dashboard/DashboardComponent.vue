@@ -20,9 +20,9 @@
                           Categories
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                          <li><a class="dropdown-item" href="#">Beaches</a></li>
-                          <li><a class="dropdown-item" href="#">Waterfalls</a></li>
-                          <li><a class="dropdown-item" href="#">Mountain Climbing</a></li>
+                          <li><a class="dropdown-item" href="#" @click="GoToBeaches">Beaches</a></li>
+                          <li><a class="dropdown-item" href="#" @click="GoToWaterfalls">Waterfalls</a></li>
+                          <li><a class="dropdown-item" href="#" @click="GoToMountainClimbing">Mountain Climbing</a></li>
                       </ul>
                   </li>
 
@@ -110,6 +110,15 @@ export default {
   },
 
   methods: {
+    GoToBeaches() {
+      window.location.href = '/beaches';
+      },
+      GoToWaterfalls() {
+      window.location.href = '/waterfalls';
+      },
+      GoToMountainClimbing() {
+      window.location.href = '/mountainclimbing';
+      },
     addBlog() {
       this.$bvModal.show('addBlog');
     },

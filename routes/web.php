@@ -30,7 +30,6 @@ Route::namespace('App\Http\Controllers\Admin')->group(function() {
     Route::get('/beaches', 'BeachesController@index')->name('beaches');
     Route::get('/waterfalls', 'WaterfallsController@index')->name('waterfalls');
     Route::get('/mountainclimbing', 'MountainClimbingController@index')->name('mountainclimbing');
-    Route::get('/beaches', 'BeachesController@index')->name('beaches');
     Route::get('/profile', 'Profile\ProfileController@index')->name('profile');
 
 
