@@ -42,7 +42,7 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                 <li>
-                    <button type="button" class="dropdown-item" @click="profile">Profile</button>
+                    <button type="button" class="dropdown-item" @click="goToProfile">Profile</button>
                 </li>
                 <li>
                     <button type="button" class="dropdown-item" @click="logout">Logout</button>
@@ -116,6 +116,10 @@ export default {
 
     updateData(itemId) {
       this.$bvModal.show(`updata-data-${itemId}`);
+    },
+
+    goToProfile(){
+        window.location.href = '/profile';
     },
 
     getData() {
