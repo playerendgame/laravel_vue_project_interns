@@ -45,6 +45,7 @@ Route::post('/delete/post/{id}', [PostController::class, 'delete']);
 Route::post('/register',[App\Http\Controllers\Ajax\Admin\Login\LoginController::class,'register'])->name('register');
 Route::post('/login',[App\Http\Controllers\Ajax\Admin\Login\LoginController::class,'login'])->name('login');
 Route::post('/logout/user',[App\Http\Controllers\Ajax\Admin\Login\LoginController::class, 'logout'])->name('logout');
+Route::post('/update/post/image/{id}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'updatePostImage']);
 
 
 Route::get('/auth/user', function () {

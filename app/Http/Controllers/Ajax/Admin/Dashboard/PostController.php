@@ -30,11 +30,11 @@ class PostController extends Controller
 
         //Ito ang logic codes for image handling
         $imageName = $request->file('image')->getClientOriginalName();
-        $request->file('image')->storeAs('public/posts/'.$post->title, $imageName, 'public');
+        $request->file('image')->storeAs('public/posts/'.$post->id, $imageName, 'public');
 
         $postImage = new PostImage();
         $postImage->post_id = $post->id;
-        $postImage->image_path = 'public/posts/'.$post->title.'/'.$imageName;
+        $postImage->image_path = 'public/posts/'.$post->id.'/'.$imageName;
         $postImage->image_name = $imageName;
         $postImage->save();
 
@@ -60,7 +60,7 @@ class PostController extends Controller
                     'title' => $item->title,
                     'description' => $item->description,
                     'date' => $item->date,
-                    'image' => asset('storage/public/posts/' . $item->title. '/' . $postImage->image_name),
+                    'image' => asset('storage/public/posts/' . $item->id. '/' . $postImage->image_name),
                 ];
             }
  
@@ -69,15 +69,15 @@ class PostController extends Controller
     }
 
     public function fetchPostPerId($id) {
-        $post = Post::find($id);
+        $post = Post::with('postImage')->find($id);
         return response()->json($post);
     }
+    
     public function update(Request $request, $id){
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
-            'image' => 'required'
         ]);
 
        $post = Post::find($id);
@@ -87,7 +87,14 @@ class PostController extends Controller
        $post->date = $request->input('date');
        $post->save();
 
-       $postImage = PostImage::where('post_id', $post->id)->first();
+        return response()->json(['message' => 'Success updating data']);
+    }
+
+    public function updatePostImage(Request $request, $id){
+
+       $post = Post::find($id);
+
+        $postImage = PostImage::where('post_id', $post->id)->first();
 
        if($postImage){
             Storage::disk('public')->delete($postImage->image_path);
@@ -95,15 +102,13 @@ class PostController extends Controller
         }
 
         $imageName = $request->file('image')->getClientOriginalName();
-        $request->file('image')->storeAs('public/posts/'.$post->title, $imageName, 'public');
+        $request->file('image')->storeAs('public/posts/'.$post->id, $imageName, 'public');
 
         $newPostImage = new PostImage();
         $newPostImage->post_id = $post->id;
-        $newPostImage->image_path = 'public/posts/'.$post->title.'/'.$imageName;
+        $newPostImage->image_path = 'public/posts/'.$post->id.'/'.$imageName;
         $newPostImage->image_name = $imageName;
         $newPostImage->save();
-
-        return response()->json(['message' => 'Success updating data']);
     }
 
     public function delete($id){
