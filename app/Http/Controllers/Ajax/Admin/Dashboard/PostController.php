@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function create(Request $request)
     {
-        
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -38,8 +38,8 @@ class PostController extends Controller
         $postImage->image_name = $imageName;
         $postImage->save();
 
- 
-        $result = ($post) ? 'Data has been created successfully' : 'There has an error creating a post';    
+
+        $result = ($post) ? 'Data has been created successfully' : 'There has an error creating a post';
         return response()->json(['message' => $result]);
     }
 
@@ -63,7 +63,7 @@ class PostController extends Controller
                     'image' => asset('storage/public/posts/' . $item->id. '/' . $postImage->image_name),
                 ];
             }
- 
+
         }
         return response()->json($data);//wondering bakit $data ginamit ko? dahil mapapansin nio nasa loob ng for loop parameters ang $post
     }
@@ -72,7 +72,7 @@ class PostController extends Controller
         $post = Post::with('postImage')->find($id);
         return response()->json($post);
     }
-    
+
     public function update(Request $request, $id){
         $request->validate([
             'title' => 'required|string|max:255',
