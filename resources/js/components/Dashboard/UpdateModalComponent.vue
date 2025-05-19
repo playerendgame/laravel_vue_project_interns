@@ -2,15 +2,22 @@
     <div>
         <b-modal :id="`updata-data-${itemId}`" :hide-footer="true" title="Update Post" @show="showData" size="lg" centered  hide-header-close="false">
             <div class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Title</label>
+                <div class="form-group mb-2">
+                    <label class="form-label" style="font-weight: bold;">Title</label>
                     <input class="form-control" v-model="post.title" type="text" />
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Description</label>
+                <div class="form-group mb-2">
+                    <label class="form-label" style="font-weight: bold;">Description</label>
                     <input class="form-control" v-model="post.description" type="text" />
                 </div>
-                 <div class="mb-4" style="margin-left: 1rem">
+                <div class="form-group mb-4">
+                    <label for="categorySelect" class="form-label" style="font-weight: bold;">Selected Category</label>
+                    <select id="categorySelect" class="form-control text-dark" v-model="post.category_id">
+                    <option disabled value="">Select Category</option>
+                    <option class="text-dark" v-for="category in categories" :key="category.id" :value="category.id"> {{ category.category_name }}</option>
+                    </select>
+                </div>
+                 <div class="mb-4" style="margin-left: 1rem;">
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" v-model="updateImage" id="updatePostImage" switch>
                         <label class="form-check-label" for="updatePostImage">
@@ -46,9 +53,11 @@ export default {
                 title: '',
                 description: '',
                 date: '',
+                category_id: ''
             },
             image: null,
-            updateImage: false
+            updateImage: false,
+            categories: []
         };
     },
     props: {
@@ -61,6 +70,7 @@ export default {
     methods: {
         showData() {
             this.fetchData();
+            this.fetchCategories();
         },
 
         fetchData() {
@@ -133,7 +143,17 @@ export default {
 
         hideModal() {
             this.$bvModal.hide(`updata-data-${this.itemId}`);
-        }
+        },
+        fetchCategories() {
+        axios.get('/category_type')
+        .then(response => {
+        this.categories = response.data;
+        })
+        .catch(error => {
+            console.error('Error fetching categories:', error);
+        });
+
+       },
     },
 
 };

@@ -18,6 +18,7 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
+            'category_id' => 'required',
             'image' => 'required'
         ]);
 
@@ -25,6 +26,7 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         $post->date = $request->input('date');
+        $post->category_id = $request->input('category_id');
         $post->admin_id = auth()->id();
         $post->save();
 
@@ -78,6 +80,7 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
+            'category_id' => 'required',
         ]);
 
        $post = Post::find($id);
@@ -85,6 +88,7 @@ class PostController extends Controller
        $post->title = $request->input('title');
        $post->description = $request->input('description');
        $post->date = $request->input('date');
+       $post->category_id = $request->input('category_id');
        $post->save();
 
         return response()->json(['message' => 'Success updating data']);

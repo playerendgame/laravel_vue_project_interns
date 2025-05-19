@@ -13,17 +13,25 @@
         <textarea class="form-control" v-model="post.description" rows="4" placeholder="Write a brief description..." required></textarea>
       </div>
 
+      <div class="form-group mb-4" style="font-weight: bold;">
+        <label for="categorySelect" class="form-label">Select Categories</label>
+         <select id="categorySelect" class="form-control text-dark" v-model="post.category_id">
+          <option disabled value="">Select Category</option>
+          <option class="text-dark" v-for="category in categories" :key="category.id" :value="category.id"> {{ category.category_name }}</option>
+        </select>
+      </div>
+
       <div class="mb-4">
         <label class="form-label fw-semibold">Post Image</label>
         <input class="form-control" type="file" @change="handleFileChange" required />
       </div>
-
+      
       <div class="mb-4">
         <label class="form-label fw-semibold">Date</label>
         <input class="form-control" v-model="post.date" type="date" required />
       </div>
 
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end" style="gap: 10px">
         <button class="btn btn-success" @click="create">Post</button>
         <button class="btn btn-secondary me-2" @click="hideModal">Cancel</button>
       </div>
@@ -44,15 +52,31 @@ export default {
         title: '',
         description: '',
         date: '',
+        category_id: ''
       },
-    image: null
+    image: null,
+    categories: [],
     };
   },
 
+  mounted(){
+    this.fetchCategories();
+  },
+
   methods: {
+    fetchCategories(){
+      axios.get('/category_type')
+      .then(response => {
+        this.categories= response.data;
+        console.log('Categories:', this.categories);
+      })
+      .catch(error => {
+        console.error('Error fetching categories:', error);
+      });
+    },
     create() {
      
-      if (!this.post.title || !this.post.description || !this.post.date) {
+      if (!this.post.title || !this.post.description || !this.post.date || !this.post.category_id) {
         Swal.fire('Error', 'Please fill in all fields.', 'error');
         return;
       }
@@ -74,8 +98,10 @@ export default {
           formData.append('title', this.post.title);
           formData.append('description', this.post.description);
           formData.append('date', this.post.date);
+          formData.append('category_id', this.post.category_id);
           formData.append('image', this.image);
-             axios.post('/add/post/data', formData, {
+
+          axios.post('/add/post/data', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

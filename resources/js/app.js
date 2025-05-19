@@ -43,6 +43,7 @@ Vue.component('waterfalls-component', require('./components/WaterfallsComponent.
 Vue.component('mountainclimbing-component', require('./components/MountainClimbingComponent.vue').default);
 Vue.component('addprofile-component', require('./components/ProfileModal/AddProfileComponent.vue').default);
 Vue.component('dashboardprofile-component', require('./components/ProfileModal/DashboardProfileComponent.vue').default);
+Vue.component('blog-component', require('./components/Dashboard/BlogSectionComponent.vue').default);
 
 
 /**

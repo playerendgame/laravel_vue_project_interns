@@ -1,10 +1,6 @@
 <template>
 
   <div>
-
-    <addblog-component @refresh-table="refreshTable" />
-
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
       <div class="container-fluid">
           <a class="navbar-brand text-white fw-bold ms-5 px-3" href="#">Travel Blog</a>
@@ -12,7 +8,11 @@
           <div class="collapse navbar-collapse" id="navbarContent">
               <ul class="navbar-nav mx-auto d-flex flex-row justify-content-center">
                   <li class="nav-item">
-                      <a class="nav-link fw-semibold text-white" href="#">Home</a>
+                      <a class="nav-link fw-semibold text-white" href="#"><span style="color: #F77137">Home</span></a>
+                  </li>
+                  <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
+                  <li class="nav-item">
+                      <a class="nav-link fw-semibold text-white" href="#" @click="goToBlog">Blog</a>
                   </li>
                   <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
                   <li class="nav-item dropdown dropdown-hover">
@@ -59,40 +59,10 @@
           <source :src="videoUrl" type="video/mp4">
         </video>
         <div class="poster-text">
-          <h1 class="fw-bold poster-overlay">Travel Diary Blog</h1>
-          <p class="lead">Your next adventure starts here</p>
+          <h1 class="fw-bold poster-overlay">Adventure Awaits, Go Find It</h1>
+          <p class="lead">Moments Captured, Memories Kept</p>
         </div>
     </div>
-
-    <!-- Page Content -->
-    <div class="container mt-5">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <button type="button" class="btn btn-success" @click="addBlog">
-          Add Blog
-        </button>
-      </div>
-
-      <!-- Blog Card List -->
-      <div class="row">
-        <div class="col-md-4 mb-4" v-for="item in post" :key="item.id">
-          <div class="card h-100 shadow-sm">
-            <img :src="item.image" class="card-img-top" alt="Blog image" style="height: 200px; object-fit: cover;"/>
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <p class="card-text">{{ item.description }}</p>
-              <p class="card-text text-muted mt-auto">Date: {{ item.date }}</p>
-              <div class="button d-flex">
-                <button class="btn btn-success" @click="updateData(item.id)">Update</button>
-                <updateblog-component :itemId="item.id" @refresh-table="refreshTable" />
-                <button class="btn btn-danger" @click="deletePost(item.id)">Delete</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
   </div>
 </template>
 
@@ -103,14 +73,16 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      post: [],
       videoUrl: '/vid.mp4',
       user: null,
     };
   },
 
   methods: {
-    GoToBeaches() {
+      goToBlog(){
+        window.location.href = '/blog';
+      },
+      GoToBeaches() {
       window.location.href = '/beaches';
       },
       GoToWaterfalls() {
@@ -119,63 +91,11 @@ export default {
       GoToMountainClimbing() {
       window.location.href = '/mountainclimbing';
       },
-    addBlog() {
-      this.$bvModal.show('addBlog');
-    },
-
-    updateData(itemId) {
-      this.$bvModal.show(`updata-data-${itemId}`);
-    },
-
-    goToProfile(){
+      goToProfile(){
         window.location.href = '/profile';
-    },
-
-    getData() {
-      axios.get('/fetch/post')
-        .then((response) => {
-          this.post = response.data;
-        })
-        .catch((error) => {
-          console.error('There was an error fetching the posts:', error);
-        });
-    },
-
-    refreshTable() {
-      this.getData();
-    },
-
+      },
     getImageUrl(path) {
       return path ? `/storage/${path}` : this.defaultImage;
-    },
-
-    handleImageError(event) {
-      event.target.src = this.defaultImage;
-    },
-
-    deletePost(postId) {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'This post will be deleted permanently!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#6c757d',
-        confirmButtonText: 'Yes, delete it!',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          axios
-            .post(`/delete/post/${postId}`)
-            .then(() => {
-              Swal.fire('Deleted!', 'The post has been deleted.', 'success');
-              this.getData();
-            })
-            .catch((error) => {
-              Swal.fire('Error!', 'There was a problem deleting the post.', 'error');
-              console.error(error.message);
-            });
-        }
-      });
     },
     getAuthenticatedUser() {
       axios.get('/auth/user')
@@ -204,9 +124,7 @@ export default {
         });
     },
   },
-
   mounted() {
-    this.getData();
     this.getAuthenticatedUser();
   },
 };

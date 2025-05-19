@@ -31,6 +31,8 @@ Route::namespace('App\Http\Controllers\Admin')->group(function() {
     Route::get('/waterfalls', 'WaterfallsController@index')->name('waterfalls');
     Route::get('/mountainclimbing', 'MountainClimbingController@index')->name('mountainclimbing');
     Route::get('/profile', 'Profile\ProfileController@index')->name('profile');
+    Route::get('/blog', 'LandingPage\BlogController@index')->name('blog');
+    Route::get('/category_type', 'CategoryController@fetchCategory')->name('category');
 
 
 
