@@ -50,7 +50,9 @@ class PostController extends Controller
         $adminId = Auth::guard('user')->user()->id;
 
 
-        $post = Post::where('admin_id', $adminId)->get();
+        $post = Post::with('category')
+        ->where('admin_id', $adminId)
+        ->get();
 
         //Gumamit ako ng for loop to detect ung actual image for the specific posts
         $data = [];
@@ -63,6 +65,7 @@ class PostController extends Controller
                     'description' => $item->description,
                     'date' => $item->date,
                     'category_id' => $item->category_id,
+                    'category_name' => $item->category->category_name,
                     'image' => asset('storage/public/posts/' . $item->id. '/' . $postImage->image_name),
                 ];
             }
@@ -140,6 +143,7 @@ class PostController extends Controller
                     'description' => $item->description,
                     'date' => $item->date,
                     'category_id' => $item->category_id,
+                    'category_name' => $item->category->category_name,
                     'image' => asset('storage/public/posts/' . $item->id. '/' . $postImage->image_name),
                 ];
             }
