@@ -62,6 +62,7 @@ class PostController extends Controller
                     'title' => $item->title,
                     'description' => $item->description,
                     'date' => $item->date,
+                    'category_id' => $item->category_id,
                     'image' => asset('storage/public/posts/' . $item->id. '/' . $postImage->image_name),
                 ];
             }
@@ -84,7 +85,6 @@ class PostController extends Controller
         ]);
 
        $post = Post::find($id);
-
        $post->title = $request->input('title');
        $post->description = $request->input('description');
        $post->date = $request->input('date');
@@ -125,4 +125,25 @@ class PostController extends Controller
         return response()->json(['message' => $result]);
 
      }
+
+    public function getPostsByCategory(Request $request, $categoryId)
+    {
+        $post = Post::where('category_id', $categoryId)->get();
+
+        $data = [];
+        foreach($post as $item){
+            $postImage = PostImage::Where('post_id', $item->id)->first();
+            if($postImage){
+                $data[] = [
+                    'id' => $item->id,
+                    'title' => $item->title,
+                    'description' => $item->description,
+                    'date' => $item->date,
+                    'category_id' => $item->category_id,
+                    'image' => asset('storage/public/posts/' . $item->id. '/' . $postImage->image_name),
+                ];
+            }
+        }
+        return response()->json($data);
+    }
 }

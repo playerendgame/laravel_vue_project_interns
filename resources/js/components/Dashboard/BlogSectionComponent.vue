@@ -14,49 +14,35 @@
                   <li class="nav-item">
                       <a class="nav-link fw-semibold text-white" href="#" @click="goToHome">Home</a>
                   </li>
-                  <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
+                      <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
                   <li class="nav-item">
                       <a class="nav-link fw-semibold text-white" href="#"><span style="color: #F77137">Blog</span></a>
                   </li>
-                  <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
-                  <li class="nav-item dropdown dropdown-hover">
-                      <a class="nav-link dropdown-toggle fw-semibold text-white" href="#" id="categoriesDropdown" role="button">
-                          Categories
-                      </a>
-                      <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                          <li><a class="dropdown-item" href="#" @click="GoToBeaches">Beaches</a></li>
-                          <li><a class="dropdown-item" href="#" @click="GoToWaterfalls">Waterfalls</a></li>
-                          <li><a class="dropdown-item" href="#" @click="GoToMountainClimbing">Mountain Climbing</a></li>
-                      </ul>
-                  </li>
-
-                  <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
-
+                      <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
                   <li class="nav-item">
-                      <a class="nav-link fw-semibold text-white" href="#">About</a>
+                      <a class="nav-link fw-semibold text-white" href="#" @click="GoToAbout">About</a>
                   </li>
               </ul>
           </div>
           <div v-if="user" class="d-flex align-items-center text-white fw-bold ms-auto me-3" style="gap: 10px; cursor: pointer;">
-            <span>Welcome, {{ user.name }}</span>
-            <div class="dropdown">
-              <a
-                class="text-white dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle fs-4"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li>
-                    <button type="button" class="dropdown-item" @click="goToProfile">Profile</button>
-                </li>
-                <li>
-                    <button type="button" class="dropdown-item" @click="logout">Logout</button>
-                </li>
-              </ul>
-            </div>
+              <span>Welcome, {{ user.name }}</span>
+                <div class="dropdown">
+                  <a
+                    class="text-white dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle fs-4"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                      <li>
+                          <button type="button" class="dropdown-item" @click="goToProfile">Profile</button>
+                      </li>
+                      <li>
+                          <button type="button" class="dropdown-item" @click="logout">Logout</button>
+                      </li>
+                  </ul>
+                </div>
           </div>
       </div>
   </nav>
-
 
     <div class="poster-section mb-5">
         <video class="poster-video" autoplay muted loop>
@@ -74,7 +60,17 @@
         <button type="button" class="btn btn-success" @click="addBlog">
           Add Blog
         </button>
+
+       <div class="input-group ms-auto" style="width: 300px;">
+         <label class="input-group-text text-white" for="categorySelect" style="background-color: #198754;">Sort by:</label>
+        <select class="form-select" id="categorySelect" v-model="category_id" @change="applyFilter($event)">
+          <option value="" selected>All Categories</option>
+          <option v-for="category in categories" :key="category.id" :value="category.id">
+            {{ category.category_name }}
+          </option>
+        </select>
       </div>
+    </div>
 
       <!-- Blog Card List -->
       <div class="row">
@@ -95,8 +91,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </template>
 
@@ -110,10 +104,43 @@ export default {
       post: [],
       videoUrl: '/PH.mp4',
       user: null,
+      category_id: '',
+      categories: []
     };
+
   },
 
-  methods: {
+    methods: {
+      loadCategories() {
+      axios.get('/category_type')
+        .then(response => {
+          console.log('Categories loaded:', response.data);
+          this.categories = response.data;
+        })
+        .catch(error => {
+          console.error('Failed to load categories:', error);
+        });
+      },
+      
+      filterBySelectCategory(event) {
+        this.category_id = event.target.value;
+        this.applyFilter();
+      },
+
+      applyFilter() {
+        if (this.category_id === '') {
+            this.getData();
+        } else {
+            axios.get(`/fetch/posts/by-category/${this.category_id}`)
+                .then(response => {
+                    this.post = response.data;
+                })
+                .catch(error => {
+                    console.error('Failed to filter posts:', error);
+                });
+              }
+      },
+
       goToHome(){
         window.location.href = '/dashboard';
       },
@@ -125,6 +152,9 @@ export default {
       },
       GoToMountainClimbing() {
       window.location.href = '/mountainclimbing';
+      },
+      GoToAbout(){
+      window.location.href = '/about';
       },
     addBlog() {
       this.$bvModal.show('addBlog');
@@ -215,6 +245,7 @@ export default {
   mounted() {
     this.getData();
     this.getAuthenticatedUser();
+    this.loadCategories();
   },
 };
 </script>

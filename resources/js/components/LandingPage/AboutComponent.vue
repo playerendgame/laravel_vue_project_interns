@@ -1,5 +1,58 @@
 <template>
   <div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+      <div class="container-fluid">
+          <a class="navbar-brand text-white fw-bold ms-5 px-3" href="#">Travel Blog</a>
+
+          <div class="collapse navbar-collapse" id="navbarContent">
+              <ul class="navbar-nav mx-auto d-flex flex-row justify-content-center">
+                  <li class="nav-item">
+                      <a class="nav-link fw-semibold text-white" href="#" @click="GoToHome">Home</a>
+                  </li>
+                  <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
+                  <li class="nav-item">
+                      <a class="nav-link fw-semibold text-white" href="#" @click="GoToBlog">Blog</a>
+                  </li>
+                  <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
+                  <li class="nav-item dropdown dropdown-hover">
+                      <a class="nav-link dropdown-toggle fw-semibold text-white" href="#" id="categoriesDropdown" role="button">
+                          Categories
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                          <li><a class="dropdown-item" href="#" @click="GoToBeaches">Beaches</a></li>
+                          <li><a class="dropdown-item" href="#" @click="GoToWaterfalls">Waterfalls</a></li>
+                          <li><a class="dropdown-item" href="#" @click="GoToMountainClimbing">Mountain Climbing</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
+
+                  <li class="nav-item">
+                      <a class="nav-link fw-semibold text-white" href="#"><span style="color: #F77137">About</span></a>
+                  </li>
+              </ul>
+          </div>
+          <div v-if="user" class="d-flex align-items-center text-white fw-bold ms-auto me-3" style="gap: 10px; cursor: pointer;">
+            <span>Welcome, {{ user.name }}</span>
+            <div class="dropdown">
+              <a
+                class="text-white dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle fs-4"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li>
+                    <button type="button" class="dropdown-item" @click="goToProfile">Profile</button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item" @click="logout">Logout</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </div>
+  </nav>
+
     <!-- SWIPER -->
     <swiper-container 
       class="AboutSwiper"
@@ -158,6 +211,24 @@
     </div>
   </div>
 </template>
+
+<script>
+import Swal from 'sweetalert2';
+import axios from 'axios';
+
+export default{
+
+  methods: {
+    GoToHome(){
+      window.location.href = '/dashboard';
+    },
+    GoToBlog(){
+      window.location.href = '/blog'
+    }
+  }
+
+}
+</script>
 
 <style>
 html,

@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Ajax\Admin\Dashboard\PostController;
+
+use App\Http\Controllers\Ajax\Admin\Dashboard\PostController as PostController;
 use App\Http\Controllers\Ajax\Admin\Login\LoginController;
 use App\Http\Controllers\Ajax\Admin\Dashboard\DashboardController;
 /*
@@ -47,6 +48,7 @@ Route::post('/register',[App\Http\Controllers\Ajax\Admin\Login\LoginController::
 Route::post('/login',[App\Http\Controllers\Ajax\Admin\Login\LoginController::class,'login'])->name('login');
 Route::post('/logout/user',[App\Http\Controllers\Ajax\Admin\Login\LoginController::class, 'logout'])->name('logout');
 Route::post('/update/post/image/{id}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'updatePostImage']);
+Route::get('/fetch/posts/by-category/{categoryId}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'getPostsByCategory']);
 
 
 Route::get('/auth/user', function () {

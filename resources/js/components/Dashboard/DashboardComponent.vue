@@ -29,7 +29,7 @@
                   <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
 
                   <li class="nav-item">
-                      <a class="nav-link fw-semibold text-white" href="#">About</a>
+                      <a class="nav-link fw-semibold text-white" href="#" @click="GoToAbout">About</a>
                   </li>
               </ul>
           </div>
@@ -93,6 +93,9 @@ export default {
       },
       goToProfile(){
         window.location.href = '/profile';
+      },
+      GoToAbout(){
+      window.location.href = '/about';
       },
     getImageUrl(path) {
       return path ? `/storage/${path}` : this.defaultImage;
