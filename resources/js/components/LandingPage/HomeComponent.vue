@@ -9,16 +9,9 @@
         <a class="navbar-brand text-white fw-bold ms-5 px-3 fonthome" href="#">WanderStories</a>
         <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav mx-auto d-flex flex-row justify-content-center">
-            <li class="nav-item"><a class="nav-link fw-semibold text-white" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-white">Home</a></li>
             <li class="vr text-white mx-2"></li>
-            <li class="nav-item dropdown dropdown-hover">
-              <a class="nav-link dropdown-toggle fw-semibold text-white" href="#">Categories</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" @click="GoToBeaches" >Beaches</a></li>
-                <li><a class="dropdown-item" href="#" @click="GoToWaterfalls" >Waterfalls</a></li>
-                <li><a class="dropdown-item" href="#" @click="GoToMountainClimbing" >Mountain Climbing</a></li>
-              </ul>
-            </li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-white" href="#" @click="GoToBlog">Blog</a></li>
             <li class="vr text-white mx-2"></li>
             <li class="nav-item"><a class="nav-link fw-semibold text-white" href="#">About</a></li>
           </ul>
@@ -178,7 +171,10 @@ export default {
     };
   },
   methods: {
-    GoToBeaches() {
+  GoToBlog() {
+    window.location.href = '/travelblog';
+  },
+  GoToBeaches() {
   window.location.href = '/beaches';
   },
   GoToWaterfalls() {

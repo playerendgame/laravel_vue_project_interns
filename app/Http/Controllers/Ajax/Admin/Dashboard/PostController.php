@@ -67,6 +67,7 @@ class PostController extends Controller
                     'category_id' => $item->category_id,
                     'category_name' => $item->category->category_name,
                     'image' => asset('storage/public/posts/' . $item->id. '/' . $postImage->image_name),
+                    'admin_name' => $item->user->name,
                 ];
             }
 
@@ -129,9 +130,11 @@ class PostController extends Controller
 
      }
 
-    public function getPostsByCategory(Request $request, $categoryId)
-    {
-        $post = Post::where('category_id', $categoryId)->get();
+    public function getPostsByCategory(Request $request, $categoryId){
+        $user = auth()->user();
+        $post = Post::where('category_id', $categoryId)
+                    ->where('admin_id', $user->id)
+                    ->get();
 
         $data = [];
         foreach($post as $item){
@@ -145,9 +148,36 @@ class PostController extends Controller
                     'category_id' => $item->category_id,
                     'category_name' => $item->category->category_name,
                     'image' => asset('storage/public/posts/' . $item->id. '/' . $postImage->image_name),
+                    'admin_name' => $item->user->name,
                 ];
             }
         }
         return response()->json($data);
     }
+
+    public function AllPosts(Request $request){
+        $post = Post::with('category')
+        ->get();
+
+     
+        $data = [];
+        foreach($post as $item){
+            $postImage = PostImage::Where('post_id', $item->id)->first();
+            if($postImage){
+                $data[] = [
+                    'id' => $item->id,
+                    'title' => $item->title,
+                    'description' => $item->description,
+                    'date' => $item->date,
+                    'category_id' => $item->category_id,
+                    'category_name' => $item->category->category_name,
+                    'image' => asset('storage/public/posts/' . $item->id. '/' . $postImage->image_name),
+                    'admin_name' => $item->user->name,
+                ];
+            }
+
+        }
+        return response()->json($data);
+      }
 }
+

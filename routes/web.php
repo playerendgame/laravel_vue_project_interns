@@ -24,18 +24,16 @@ use App\Http\Controllers\Ajax\Admin\Dashboard\DashboardController;
 Route::namespace('App\Http\Controllers\Admin')->group(function() {
 
     Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
-    Route::get('/home', 'LandingPage\HomeController@index')->name('home');
+    Route::get('/', 'LandingPage\HomeController@index')->name('home');
     Route::get('/about', 'LandingPage\AboutController@index')->name('about');
     Route::get('/categories', 'LandingPage\CategoriesController@index')->name('categories');
-    Route::get('/', 'LandingPage\TravelBlogController@index');
     Route::get('/beaches', 'BeachesController@index')->name('beaches');
     Route::get('/waterfalls', 'WaterfallsController@index')->name('waterfalls');
     Route::get('/mountainclimbing', 'MountainClimbingController@index')->name('mountainclimbing');
     Route::get('/profile', 'Profile\ProfileController@index')->name('profile');
     Route::get('/blog', 'LandingPage\BlogController@index')->name('blog');
     Route::get('/category_type', 'CategoryController@fetchCategory')->name('category');
-
-
+    Route::get('/travelblog', 'LandingPage\TravelBlogController@index')->name('travelblog');
 
 });
 
@@ -49,8 +47,11 @@ Route::post('/login',[App\Http\Controllers\Ajax\Admin\Login\LoginController::cla
 Route::post('/logout/user',[App\Http\Controllers\Ajax\Admin\Login\LoginController::class, 'logout'])->name('logout');
 Route::post('/update/post/image/{id}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'updatePostImage']);
 Route::get('/fetch/posts/by-category/{categoryId}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'getPostsByCategory']);
+Route::get('/fetch/all/post', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'AllPosts']);
+
 
 
 Route::get('/auth/user', function () {
     return response()->json(Auth::guard('user')->user());
 })->name('auth.user');
+ 

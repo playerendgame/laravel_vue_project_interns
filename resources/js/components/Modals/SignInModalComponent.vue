@@ -3,22 +3,22 @@
         <div>
             <h4 style="text-align: center; font-weight: bold">User Sign Up</h4>
             <br>
-            <div class="form-group">
-                <label class="form-label">Name</label>
+            <div class="form-group pb-2">
+                <label class="form-label">Full name</label>
                 <input class="form-control" type="text" v-model="post.name" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group pb-2">
                 <label class="form-label">Email</label>
                 <input class="form-control" type="email" v-model="post.email" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group pb-2">
                 <label class="form-label">Password</label>
                 <input class="form-control" type="password" v-model="post.password" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group pb-2">
                 <label class="form-label">Confirm Password</label>
                 <input class="form-control" type="password" v-model="post.password_confirmation" required>
                 <p class="mt-3 text-center">

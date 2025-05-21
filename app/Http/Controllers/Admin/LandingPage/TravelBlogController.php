@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class TravelBlogController extends Controller
 {
     public function index(){
-        return view('landing.home');
+        return view('LandingPageBlogSection');
     }
 }

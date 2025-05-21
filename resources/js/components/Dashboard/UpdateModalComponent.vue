@@ -10,11 +10,11 @@
                     <label class="form-label" style="font-weight: bold;">Description</label>
                     <input class="form-control" v-model="post.description" type="text" />
                 </div>
-                <div class="form-group mb-4">
-                    <label for="categorySelect" class="form-label" style="font-weight: bold;">Selected Category</label>
-                    <select id="categorySelect" class="form-control text-dark" v-model="post.category_id">
-                    <option disabled value="">Select Category</option>
-                    <option class="text-dark" v-for="category in categories" :key="category.id" :value="category.id"> {{ category.category_name }}</option>
+                 <div class="form-group mb-4">
+                    <label for="categorySelect" class="form-label font-weight-bold mb-2">Select Category</label>
+                    <select id="categorySelect" class="form-control form-select text-dark" v-model="post.category_id">
+                        <option disabled value="">Select Category</option>
+                        <option class="text-dark" v-for="category in categories" :key="category.id" :value="category.id"> {{ category.category_name }}</option>
                     </select>
                 </div>
                  <div class="mb-4" style="margin-left: 1rem;">

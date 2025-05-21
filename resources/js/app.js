@@ -44,6 +44,7 @@ Vue.component('mountainclimbing-component', require('./components/MountainClimbi
 Vue.component('addprofile-component', require('./components/ProfileModal/AddProfileComponent.vue').default);
 Vue.component('dashboardprofile-component', require('./components/ProfileModal/DashboardProfileComponent.vue').default);
 Vue.component('blog-component', require('./components/Dashboard/BlogSectionComponent.vue').default);
+Vue.component('travel-blog-section-component', require('./components/LandingPage/TravelBlogComponent.vue').default);
 
 
 /**

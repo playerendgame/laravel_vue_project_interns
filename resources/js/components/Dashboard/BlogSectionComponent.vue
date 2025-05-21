@@ -2,24 +2,16 @@
   <div>
     <addblog-component @refresh-table="refreshTable" />
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
       <div class="container-fluid">
         <a class="navbar-brand text-white fw-bold ms-5 px-3" href="#">Travel Blog</a>
-
         <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav mx-auto d-flex flex-row justify-content-center gap-3">
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-white" href="#" @click="goToHome">Home</a>
-            </li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-white" href="#" @click="goToHome">Home</a></li>
             <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-white" href="#"><span style="color: #F77137">Blog</span></a>
-            </li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-white" href="#"><span style="color: #F77137">Blog</span></a></li>
             <li class="vr text-white mx-2" style="height: 40px; width: 2px;"></li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-white" href="#" @click="GoToAbout">About</a>
-            </li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-white" href="#" @click="GoToAbout">About</a></li>
           </ul>
         </div>
 
@@ -42,7 +34,7 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
+    
     <div class="poster-section mb-5">
       <video class="poster-video" autoplay muted loop>
         <source :src="videoUrl" type="video/mp4">
@@ -53,16 +45,18 @@
       </div>
     </div>
 
-    <!-- Page Content -->
+    
     <div class="container mt-5">
       <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
         <button type="button" class="btn btn-success" @click="addBlog">
           <i class="bi bi-plus-circle me-1"></i> Add Blog
         </button>
+
         <div class="input-group ms-auto mt-3 mt-md-0" style="width: 300px;">
           <label class="input-group-text text-white" for="categorySelect" style="background-color: #198754;">
             <i class="bi bi-filter me-2"></i>Sort by :
           </label>
+
           <select class="form-select" id="categorySelect" v-model="category_id" @change="applyFilter($event)">
             <option value="" selected>All Categories</option>
             <option v-for="category in categories" :key="category.id" :value="category.id">
@@ -72,7 +66,7 @@
         </div>
       </div>
 
-      <!-- Blog Card List -->
+      
       <div class="row">
         <div class="col-md-4 mb-4" v-for="item in post" :key="item.id">
           <div class="card h-100 border-0 shadow-sm">
@@ -82,6 +76,7 @@
               <h5 class="card-title text-dark fw-semibold" style="text-align : center" >{{ item.title }}</h5>
               <p class="card-text text-secondary" >{{ item.description }}</p>
               <p class="card-text text-muted small"> Date Uploaded : {{ item.date }}</p>
+              <p class="card-text text-muted small"> Posted By : {{ item.admin_name }}</p>
               <div class="mt-3 d-flex flex-wrap gap-2">
                 <button class="btn btn-outline-success btn-sm" @click="updateData(item.id)">
                   <i class="bi bi-pencil-square me-1"></i> Update
