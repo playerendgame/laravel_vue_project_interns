@@ -150,6 +150,28 @@
       </div>
     </div>
 
+    <div class="footer-container" style="background-color: #343a40 !important;">
+      <div class="container-fluid p-5">
+        <div class="row justify-content-center text-center">
+          <div class="col-md-12">
+            <h2 class="FooterTitle" style="font-family: 'Playfair Display', serif; color: white;">WanderStories</h2>
+            <p class="FooterTagline text-white">Your Next Adventure Starts Here.</p>
+
+            <hr class="footer-divider my-4">
+
+            <div class="social-icons d-flex justify-content-center gap-3 mt-3">
+              <a href="https://www.facebook.com" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.x.com" class="social-icon"><i class="fab fa-x-twitter"></i></a>
+              <a href="https://www.youtube.com" class="social-icon"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.instagram.com" class="social-icon"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.discord.com" class="social-icon"><i class="fab fa-discord"></i></a>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
    
 
 
@@ -306,5 +328,37 @@ export default {
   object-fit: cover;
 }
 
+.footer-divider {
+  width: 60px;
+  border: 1px solid white;
+  margin: 0 auto; /* Center horizontally */
+  opacity: 0.6; /* Optional: make it subtle */
+}
+.FooterTitle, .FooterTagline{
+  font-family: 'Playfair Display', serif;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: white;
+  color: #343a40;
+  text-decoration: none;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #f8f9fa;
+  color: #007bff;
+}
 
 </style>
