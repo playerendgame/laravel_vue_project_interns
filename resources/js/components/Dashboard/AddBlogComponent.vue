@@ -1,5 +1,5 @@
 <template>
-  
+
   <b-modal id="addBlog" title="Create New Blog" :hide-footer="true" size="lg" centered  hide-header-close="false" @hidden="resetForm">
     <div class="modal-body px-4 py-3">
 
@@ -25,7 +25,7 @@
         <label class="form-label fw-semibold">Post Image</label>
         <input class="form-control" type="file" @change="handleFileChange" required />
       </div>
-      
+
       <div class="mb-4">
         <label class="form-label fw-semibold">Date</label>
         <input class="form-control" v-model="post.date" type="date" required />
@@ -75,7 +75,7 @@ export default {
       });
     },
     create() {
-     
+
       if (!this.post.title || !this.post.description || !this.post.date || !this.post.category_id) {
         Swal.fire('Error', 'Please fill in all fields.', 'error');
         return;
@@ -93,7 +93,7 @@ export default {
       .then((result) =>
       {
         if (result.isConfirmed) {
-          Swal.showLoading();  
+          Swal.showLoading();
           let formData = new FormData();
           formData.append('title', this.post.title);
           formData.append('description', this.post.description);
@@ -107,22 +107,22 @@ export default {
           }
         })
             .then((response) => {
-              Swal.hideLoading();  
+              Swal.hideLoading();
 
               Swal.fire
               ({
                   title: "Done Saving",
                   icon: 'success',
                   text: 'Post created successfully!'
-              
+
               });
               this.clearFields();
               this.hideModal();
               this.$emit('refresh-table');
             })
-            .catch((error) => 
+            .catch((error) =>
             {
-              Swal.hideLoading();  
+              Swal.hideLoading();
               Swal.fire({
                 title: 'Error',
                 icon: 'error',
@@ -135,7 +135,7 @@ export default {
     handleFileChange(event) {
       this.image = event.target.files[0];
     },
-    
+
     clearFields() {
       this.post = {
         title: '',
@@ -144,7 +144,7 @@ export default {
       };
     },
 
-   
+
     hideModal() {
       this.$bvModal.hide('addBlog');
     }
