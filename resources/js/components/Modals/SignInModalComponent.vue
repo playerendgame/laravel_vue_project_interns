@@ -1,7 +1,8 @@
 <template>
-    <b-modal id="signInModal" :hide-footer="true" title="Sign In User">
+    <b-modal id="signInModal" :hide-footer="true" hide-header="true" modal-class="signin-modal">
         <div>
-            <h4 style="text-align: center;">User Sign Up</h4>
+            <h4 style="text-align: center; font-weight: bold">User Sign Up</h4>
+            <br>
             <div class="form-group">
                 <label class="form-label">Name</label>
                 <input class="form-control" type="text" v-model="post.name" required>
@@ -22,13 +23,14 @@
                 <input class="form-control" type="password" v-model="post.password_confirmation" required>
                 <p class="mt-3 text-center">
                   Already have an account?
-                  <a href="#" @click="openLoginModal">Login here</a>
+                  <a style="color: #343a40;" href="#" @click="openLoginModal">Login here</a>
                 </p>
             </div>
 
-            <div class="modal-footer">
-                <button type="submit" class="svbtn btn btn-primary" @click="registerAccount" >Register Account</button>
-            </div>
+            <button type="submit" class="register-btn" @click="registerAccount">
+                Register Account
+            </button>
+
         </div>
     </b-modal>
 </template>
@@ -91,4 +93,67 @@ export default {
   }
 };
 </script>
+<style>
+.signin-modal .modal-content {
+  background-color: #F8F8FF !important;
+  color: black !important;
+  max-width: 295px;
+}
 
+.register-btn {
+  width: 100%;
+  background-color: #343a40;
+  color: white;
+  border-radius: 0.25rem;
+  border: 1px solid white;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  height: 40px;
+}
+
+.register-btn:hover{
+  background-color: white;
+  color: #343a40;
+  border-color: #343a40;
+}
+
+.signin-modal .modal-dialog {
+  max-width: 350px;
+  margin: 100px auto;
+  padding: 0 !important;
+}
+
+.signin-modal .form-control{
+  background-color: #e8e8f0;
+  color: #343a40;
+  border: 1px solid #ccc;
+  transition: background-color 0.3s ease, color 0.3s ease;
+} 
+
+.signin-modal .form-control:focus{
+  background-color: #ddddf0;
+  border-color: #999;
+  box-shadow: none;
+}
+
+.signin-header {
+  background-color: #F8F8FF !important;
+  color: black;
+  border-bottom: none;
+}
+
+.signin-header .close{
+  color: black !important;
+  opacity: 1 !important;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+.signin-body {
+  background-color: #F8F8FF !important;
+  color: black !important;
+  max-width: 295px;
+}
+</style>
