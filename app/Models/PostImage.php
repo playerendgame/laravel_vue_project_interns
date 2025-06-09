@@ -18,6 +18,6 @@ class PostImage extends Model
     protected $table = 'post_images';
 
     public function post(){
-        return $this->hasOne(Post::class, 'post_id');
+        return $this->belongsTo(Post::class, 'post_id');
     }
 }

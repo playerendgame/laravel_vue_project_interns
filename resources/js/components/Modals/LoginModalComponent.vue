@@ -73,11 +73,6 @@ export default {
   background-color: #f8f8ff;
 }
 
-/* .login-modal-content-wrapper,
-.left-side,
-.right-side {
-  outline: 2px solid red;
-} */
 
 .left-side {
   width: 45%;

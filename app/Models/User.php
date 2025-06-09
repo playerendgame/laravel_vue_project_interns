@@ -43,8 +43,11 @@ class User extends Authenticatable
     ];
 
     public function posts(){
+
         return $this->hasMany(Post::class, 'admin_id');
     }
+    public function info(){
 
-
+        return $this->hasOne(Info::class, 'user_id');
+    }
 }

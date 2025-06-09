@@ -3,8 +3,9 @@
 
 @section('contents')
 
-    <div id="app">
+        <navbar-component />
         <beaches-component />
-    </div>
+
+
 
 @endsection

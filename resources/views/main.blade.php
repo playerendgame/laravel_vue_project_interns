@@ -6,12 +6,12 @@
 <body>
 
 
-    <div class="container-fluids">
+    <div class="container-fluid">
 
         <div id="app">
             @yield('contents')
         </div>
-
+        
 
     </div>
 

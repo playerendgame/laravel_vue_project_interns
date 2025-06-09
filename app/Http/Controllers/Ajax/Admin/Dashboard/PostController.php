@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use Carbon\Carbon;
 class PostController extends Controller
 {
     public function create(Request $request)
@@ -179,5 +179,32 @@ class PostController extends Controller
         }
         return response()->json($data);
       }
+    
+
+    public function Readmore($id){
+        
+        $item = Post::with([
+            'category:id,category_name',
+            'user:id,name',
+            'user.info:id,user_id,image_path',
+            'postImage:id,post_id,image_name'
+        ])->findOrFail($id);
+
+        $data = [
+            'id' => $item->id,
+            'title' => $item->title,
+            'description' => $item->description,
+            'date' => $item->date,
+            'date_formatted' => Carbon::parse($item->date)->format('F j, Y'),
+            'category' => ($item->category)->category_name,
+            'image' => $item->postImage ? asset('storage/public/posts/' . $item->id . '/' . $item->postImage->image_name) : null,
+            'user_name' => ($item->user)->name,
+            'user_image' => $item->user->info->image_path ? asset('storage/' . $item->user->info->image_path) : null,
+        ];
+
+        return response()->json($data);
+    }
+
+    
 }
 

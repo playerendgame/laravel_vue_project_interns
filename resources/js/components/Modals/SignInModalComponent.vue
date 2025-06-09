@@ -1,7 +1,7 @@
 <template>
     <b-modal id="signInModal" :hide-footer="true" hide-header="true" modal-class="signin-modal">
         <div>
-            <h4 style="text-align: center; font-weight: bold">User Sign Up</h4>
+            <h4 class="modal-title fonthome" style="text-align: center; font-weight: bold">User Sign Up</h4>
             <br>
             <div class="form-group pb-2">
                 <label class="form-label">Full name</label>
@@ -26,7 +26,6 @@
                   <a style="color: #343a40;" href="#" @click="openLoginModal">Login here</a>
                 </p>
             </div>
-
             <button type="submit" class="register-btn" @click="registerAccount">
                 Register Account
             </button>

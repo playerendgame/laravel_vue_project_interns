@@ -34,7 +34,7 @@ Route::namespace('App\Http\Controllers\Admin')->group(function() {
     Route::get('/blog', 'LandingPage\BlogController@index')->name('blog');
     Route::get('/category_type', 'CategoryController@fetchCategory')->name('category');
     Route::get('/travelblog', 'LandingPage\TravelBlogController@index')->name('travelblog');
-
+    Route::get('/aboutdash', 'Dashboard\AboutDashController@index')->name('aboutdash');
 });
 
 Route::post('/add/post/data', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'create'])->name('post-create');
@@ -48,7 +48,10 @@ Route::post('/logout/user',[App\Http\Controllers\Ajax\Admin\Login\LoginControlle
 Route::post('/update/post/image/{id}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'updatePostImage']);
 Route::get('/fetch/posts/by-category/{categoryId}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'getPostsByCategory']);
 Route::get('/fetch/all/post', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'AllPosts']);
-
+Route::post('/get-user-by-email', [App\Http\Controllers\Ajax\Admin\InformationController::class, 'getUserByEmail']);
+Route::middleware('auth:user')->post('/save/data', [App\Http\Controllers\Ajax\Admin\InformationController::class, 'save'])->name('info-create');
+Route::middleware('auth:user')->get('/get-user-info', [App\Http\Controllers\Ajax\Admin\InformationController::class, 'getUserInfo']);
+Route::get('/readmore/{id}', [App\Http\Controllers\Ajax\Admin\Dashboard\PostController::class, 'Readmore']);
 
 
 Route::get('/auth/user', function () {

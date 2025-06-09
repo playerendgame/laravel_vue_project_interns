@@ -1,58 +1,59 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+    /**
+     * First we will load all of this project's JavaScript dependencies which
+     * includes Vue and other libraries. It is a great starting point when
+     * building robust, powerful web applications using Vue and Laravel.
+     */
 
-require('./bootstrap');
+    require('./bootstrap');
 
-window.Vue = require('vue').default;
-
-
-// Import Bootstrap and BootstrapVue CSS files (order is important)
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
-import Vue from 'vue';
-import BootstrapVue from 'bootstrap-vue';
-Vue.use(BootstrapVue)
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('dashboard-component', require('./components/Dashboard/DashboardComponent.vue').default);
-Vue.component('addblog-component', require('./components/Dashboard/AddBlogComponent.vue').default);
-Vue.component('updateblog-component', require('./components/Dashboard/UpdateModalComponent.vue').default);
-Vue.component('home-component', require('./components/LandingPage/HomeComponent.vue').default);
-Vue.component('about-component', require('./components/LandingPage/AboutComponent.vue').default);
-Vue.component('categories-component', require('./components/LandingPage/CategoriesComponent.vue').default);
-Vue.component('login-component', require('./components/Modals/LoginModalComponent.vue').default);
-Vue.component('signin-component', require('./components/Modals/SignInModalComponent.vue').default);
-Vue.component('beaches-component', require('./components/BeachesComponent.vue').default);
-Vue.component('waterfalls-component', require('./components/WaterfallsComponent.vue').default);
-Vue.component('mountainclimbing-component', require('./components/MountainClimbingComponent.vue').default);
-Vue.component('addprofile-component', require('./components/ProfileModal/AddProfileComponent.vue').default);
-Vue.component('dashboardprofile-component', require('./components/ProfileModal/DashboardProfileComponent.vue').default);
-Vue.component('blog-component', require('./components/Dashboard/BlogSectionComponent.vue').default);
-Vue.component('travel-blog-section-component', require('./components/LandingPage/TravelBlogComponent.vue').default);
+    window.Vue = require('vue').default;
 
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+    // Import Bootstrap and BootstrapVue CSS files (order is important)
+    import 'bootstrap/dist/css/bootstrap.css'
+    import 'bootstrap-vue/dist/bootstrap-vue.css'
+    import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-const app = new Vue({
-    el: '#app',
-});
+    import Vue from 'vue';
+    import BootstrapVue from 'bootstrap-vue';
+    Vue.use(BootstrapVue)
+
+    /**
+     * The following block of code may be used to automatically register your
+     * Vue components. It will recursively scan this directory for the Vue
+     * components and automatically register them with their "basename".
+     *
+     * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+     */
+
+    // const files = require.context('./', true, /\.vue$/i)
+    // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
+    Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+    Vue.component('dashboard-component', require('./components/Dashboard/DashboardComponent.vue').default);
+    Vue.component('addblog-component', require('./components/Dashboard/AddBlogComponent.vue').default);
+    Vue.component('updateblog-component', require('./components/Dashboard/UpdateModalComponent.vue').default);
+    Vue.component('home-component', require('./components/LandingPage/HomeComponent.vue').default);
+    Vue.component('about-component', require('./components/LandingPage/AboutComponent.vue').default);
+    Vue.component('categories-component', require('./components/LandingPage/CategoriesComponent.vue').default);
+    Vue.component('login-component', require('./components/Modals/LoginModalComponent.vue').default);
+    Vue.component('signin-component', require('./components/Modals/SignInModalComponent.vue').default);
+    Vue.component('beaches-component', require('./components/BeachesComponent.vue').default);
+    Vue.component('waterfalls-component', require('./components/WaterfallsComponent.vue').default);
+    Vue.component('mountainclimbing-component', require('./components/MountainClimbingComponent.vue').default);
+    Vue.component('addprofile-component', require('./components/ProfileModal/AddProfileComponent.vue').default);
+    Vue.component('dashboardprofile-component', require('./components/ProfileModal/DashboardProfileComponent.vue').default);
+    Vue.component('blog-component', require('./components/Dashboard/BlogSectionComponent.vue').default);
+    Vue.component('travel-blog-section-component', require('./components/LandingPage/TravelBlogComponent.vue').default);
+    Vue.component('aboutdash-component', require('./components/Dashboard/AboutDashComponent.vue').default);
+    Vue.component('readmore-component', require('./components/LandingPage/ReadMoreComponent.vue').default);
+    Vue.component('navbar-component', require('./components/NavbarComponent.vue').default);
+    /**
+     * Next, we will create a fresh Vue application instance and attach it to
+     * the page. Then, you may begin adding components to this application
+     * or customize the JavaScript scaffolding to fit your unique needs.
+     */
+
+    const app = new Vue({
+        el: '#app',
+    });
